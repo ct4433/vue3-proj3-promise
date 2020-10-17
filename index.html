@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <title>HelloVuejs</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{message}}</h2>
+    </div>
+    <script>
+        // 参数 -> 函数
+        // resolve和reject本身也是函数
+        // then()的参数也是一个函数
+        new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                console.log(111);
+                resolve()
+            }, 1000);
+        }).then(
+           ()=>{
+              new Promise((resolve,reject)=>{
+                  setTimeout(() => {
+                      console.log(222);
+                      reject();
+                  }, 1000)
+              }).catch(()=>{
+                  console.log(333);
+              })
+           }
+        )
+
+        Promise.all([
+            new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(111);
+                    resolve()
+                }, 1000);
+            }),
+            new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log(222);
+                    resolve()
+                }, 2000);
+            })
+        ]).then(()=>{
+            console.log(333);
+        })
+    </script>
+</body>
+
+</html>
